@@ -9,7 +9,7 @@ namespace StringCalculator
         {
             if (expression.Contains("/0"))
             {
-                throw new DivideByZeroException("Деление на ноль невозможно.");
+                throw new FormatException("Деление на ноль невозможно.");
             }
 
             if (expression == "()")

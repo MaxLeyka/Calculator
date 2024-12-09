@@ -77,7 +77,7 @@ namespace StringCalculator.Tests
         public void Test_Calculate_InvalidExpression_DivideByZero()
         {
             var expression = "10 / 0";
-            Assert.Throws<DivideByZeroException>(() => Calculator.Calculate(expression));
+            Assert.Throws<FormatException>(() => Calculator.Calculate(expression));
         }
 
         [Fact]
