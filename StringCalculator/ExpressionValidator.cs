@@ -7,6 +7,11 @@ namespace StringCalculator
     {
         public void Validate(string expression)
         {
+            if (expression.Contains("/0"))
+            {
+                throw new DivideByZeroException("Деление на ноль невозможно.");
+            }
+
             if (expression == "()")
             {
                 throw new FormatException("Выражение не может содержать пустые скобки.");
