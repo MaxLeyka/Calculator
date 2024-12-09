@@ -7,7 +7,10 @@ namespace StringCalculator
     {
         public void Validate(string expression)
         {
-
+            if (expression == "()")
+            {
+                throw new FormatException("Выражение не может содержать пустые скобки.");
+            }
             if (!Regex.IsMatch(expression, @"^[0-9\+\-\*/\(\)\.]+$"))
             {
                 throw new FormatException("Выражение содержит недопустимые символы.");
