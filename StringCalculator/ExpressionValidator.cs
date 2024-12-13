@@ -26,6 +26,10 @@ namespace StringCalculator
             {
                 if (c == '(') openParenthesesCount++;
                 if (c == ')') openParenthesesCount--;
+                if (openParenthesesCount < 0)
+                {
+                    throw new FormatException("Закрывающая скобка появляется без соответствующей открывающей.");
+                }
             }
 
             if (openParenthesesCount != 0)
@@ -36,6 +40,30 @@ namespace StringCalculator
             if (Regex.IsMatch(expression, @"[\+\-\*/]{2,}"))
             {
                 throw new FormatException("Выражение содержит последовательные операторы.");
+            }
+            if (Regex.IsMatch(expression, @"^[\+\*/]"))
+            {
+                throw new FormatException("Выражение не может начинаться с оператора * , / или +.");
+            }
+            if (Regex.IsMatch(expression, @"\([\/\*\+](?=\d)"))
+            {
+                throw new FormatException("Выражение не может содержать операторы перед числом внутри скобок.");
+            }
+            if (expression.StartsWith(")"))
+            {
+                throw new FormatException("Выражение не может начинаться с закрывающей скобки.");
+            }
+            if (Regex.IsMatch(expression, @"\)\d|\d\("))
+            {
+                throw new FormatException("Выражение не может содержать скобки в неверной последовательности, например ')1' или '2('.");
+            }
+            if (Regex.IsMatch(expression, @"[\+\-\*/]\)"))
+            {
+                throw new FormatException("Выражение не может содержать оператор перед закрывающей скобкой.");
+            }
+            if (Regex.IsMatch(expression, @"\(\)"))
+            {
+                throw new FormatException("Выражение не может содержать пустые скобки.");
             }
         }
     }
